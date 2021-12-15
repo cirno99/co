@@ -12,7 +12,7 @@ inline int get() { return GetLastError(); }
 
 inline void set(int e) { SetLastError(e); }
 
-} // err
+} // namespace err
 
 #else
 #include <errno.h>
@@ -23,6 +23,6 @@ inline int get() { return errno; }
 
 inline void set(int e) { errno = e; }
 
-} // err
+} // namespace err
 
 #endif

@@ -7,36 +7,34 @@ namespace co {
 namespace xx {
 
 class __codec Cout {
-  public:
-    Cout() {
-        this->mutex().lock();
-    }
+public:
+  Cout() { this->mutex().lock(); }
 
-    Cout(const char* file, unsigned int line) {
-        this->mutex().lock();
-        this->stream() << file << ':' << line << ']' << ' ';
-    }
+  Cout(const char *file, unsigned int line) {
+    this->mutex().lock();
+    this->stream() << file << ':' << line << ']' << ' ';
+  }
 
-    ~Cout() {
-        auto& s = this->stream().append('\n');
-        ::fwrite(s.data(), 1, s.size(), stderr);
-        s.clear();
-        this->mutex().unlock();
-    }
+  ~Cout() {
+    auto &s = this->stream().append('\n');
+    ::fwrite(s.data(), 1, s.size(), stderr);
+    s.clear();
+    this->mutex().unlock();
+  }
 
-    std::mutex& mutex() {
-        static std::mutex kMtx;
-        return kMtx;
-    }
+  std::mutex &mutex() {
+    static std::mutex kMtx;
+    return kMtx;
+  }
 
-    fastream& stream() {
-        static fastream kStream(128);
-        return kStream;
-    }
+  fastream &stream() {
+    static fastream kStream(128);
+    return kStream;
+  }
 };
 
-} // xx
-} // co
+} // namespace xx
+} // namespace co
 
-#define COUT   co::xx::Cout().stream()
-#define CLOG   co::xx::Cout(__FILE__, __LINE__).stream()
+#define COUT co::xx::Cout().stream()
+#define CLOG co::xx::Cout(__FILE__, __LINE__).stream()

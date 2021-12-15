@@ -28,32 +28,28 @@
 #include <string>
 
 typedef struct {
-    uint32 lo, hi;
-    uint32 a, b, c, d;
-    uint8 buffer[64];
-    uint32 block[16];
+  uint32 lo, hi;
+  uint32 a, b, c, d;
+  uint8 buffer[64];
+  uint32 block[16];
 } md5_ctx_t;
 
-__codec void md5_init(md5_ctx_t* ctx);
-__codec void md5_update(md5_ctx_t* ctx, const void* s, size_t n);
-__codec void md5_finish(md5_ctx_t* ctx, uint8* result);
+__codec void md5_init(md5_ctx_t *ctx);
+__codec void md5_update(md5_ctx_t *ctx, const void *s, size_t n);
+__codec void md5_finish(md5_ctx_t *ctx, uint8 *result);
 
 /**
  * @param s  a pointer to the input data.
  * @param n  size of the input data.
- * 
+ *
  * @return   a 32-byte string containing only hexadecimal digits.
  */
-__codec fastring md5sum(const void* s, size_t n);
+__codec fastring md5sum(const void *s, size_t n);
 
-inline fastring md5sum(const char* s) {
-    return md5sum(s, strlen(s));
-}
+inline fastring md5sum(const char *s) { return md5sum(s, strlen(s)); }
 
-inline fastring md5sum(const fastring& s) {
-    return md5sum(s.data(), s.size());
-}
+inline fastring md5sum(const fastring &s) { return md5sum(s.data(), s.size()); }
 
-inline fastring md5sum(const std::string& s) {
-    return md5sum(s.data(), s.size());
+inline fastring md5sum(const std::string &s) {
+  return md5sum(s.data(), s.size());
 }

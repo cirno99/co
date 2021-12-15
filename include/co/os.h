@@ -6,15 +6,15 @@
 namespace os {
 
 // get value of an environment variable
-__codec fastring env(const char* name);
+__codec fastring env(const char *name);
 
 // set value of an environment variable
-__codec bool env(const char* name, const char* value);
+__codec bool env(const char *name, const char *value);
 
 /**
- * We try to use `/` as the path separator on all platforms. 
- * On windows, `\` in results of the following APIs will be converted to `/`, if 
- * the result does not start with `\\`. 
+ * We try to use `/` as the path separator on all platforms.
+ * On windows, `\` in results of the following APIs will be converted to `/`, if
+ * the result does not start with `\\`.
  *   - homedir()
  *   - cwd()
  *   - exepath()
@@ -51,10 +51,8 @@ typedef void (*sig_handler_t)(int);
 __codec sig_handler_t signal(int sig, sig_handler_t handler, int flag = 0);
 
 // execute a shell command
-__codec bool system(const char* cmd);
+__codec bool system(const char *cmd);
 
-inline bool system(const fastring& cmd) {
-    return os::system(cmd.c_str());
-}
+inline bool system(const fastring &cmd) { return os::system(cmd.c_str()); }
 
 } // namespace os
